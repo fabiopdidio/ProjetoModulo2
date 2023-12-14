@@ -15,6 +15,6 @@ class PopulatePlans extends Seeder
     {
         Plan::create(['description' => 'BRONZE', 'limit' => 10]);
         Plan::create(['description' => 'PRATA', 'limit' => 20]);
-        Plan::create(['description' => 'OURO', 'limit' => null]);
+        Plan::create(['description' => 'OURO', 'limit' => 0]);
     }
 }
