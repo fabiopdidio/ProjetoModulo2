@@ -40,9 +40,9 @@ class UserController extends Controller
             Mail::to($data['email'])
                 ->send(new SendWelcomeEmailToUser($data['name'], $plan->limit, $plan->description));
 
-            return $user;
+            return response()->json($user->makeHidden(['password', 'remember_token']), Response::HTTP_CREATED);
         } catch (\Exception $exception) {
-            return $this->error($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+            return response()->json(['message' => $exception->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
 }
