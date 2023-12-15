@@ -40,4 +40,19 @@ class ExerciseController extends Controller
             return $this->error($exception->getMessage(), Response::HTTP_BAD_REQUEST); //400
         }
     }
+
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+
+        // Lista de exercícios do usuário ordenada pela descrição
+        $exercises = Exercise::where('user_id', $user->id)
+            ->orderBy('description')
+            ->select('id', 'description')
+            ->get();
+
+            return response()->json([
+                'exercises' => $exercises,
+            ], Response::HTTP_OK); // 200
+        }
 }
