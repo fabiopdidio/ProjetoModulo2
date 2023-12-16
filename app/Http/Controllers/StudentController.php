@@ -90,4 +90,41 @@ class StudentController extends Controller
             HttpFoundationResponse::HTTP_BAD_REQUEST); // 400
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'name' => 'string|max:255|nullable',
+                'email' => 'string|email|max:255|unique:students,email,' . $id . '|nullable',
+                'date_birth' => 'string|date|nullable',
+                'cpf' => 'string|max:255|unique:students,cpf,' . $id . '|nullable',
+                'cep' => 'string|nullable',
+                'street' => 'string|nullable',
+                'state' => 'string|nullable',
+                'neighborhood' => 'string|nullable',
+                'city' => 'string|nullable',
+                'complement' => 'string|nullable',
+                'number' => 'string|nullable',
+                'contact' => 'required|string|max:20|unique:students,contact,' . $id,
+            ]);
+
+            // Busca e atualiza o estudante
+            $student = Student::find($id);
+
+            if (!$student) {
+                return response()->json(['message' => 'Estudante não encontrado'],
+                HttpFoundationResponse::HTTP_NOT_FOUND);
+            }
+
+            $student->update($request->all());
+
+            return response()->json(['message' => 'Estudante atualizado com sucesso'],
+            HttpFoundationResponse::HTTP_OK); // 200
+
+        } catch (\Exception $exception) {
+            return response()->json(['message' => $exception->getMessage()],
+            HttpFoundationResponse::HTTP_BAD_REQUEST); // 400
+        }
+    }
 }
