@@ -20,6 +20,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/students', [StudentController::class, 'store'])->middleware('validate.students.limit'); // Rota 07
 
+    Route::get('/students', [StudentController::class, 'index']); // Rota 08
+
+
 });
 
 // rota pública de registro de usuário
