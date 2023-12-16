@@ -36,4 +36,27 @@ class StudentController extends Controller
                 ->getMessage()], HttpFoundationResponse::HTTP_BAD_REQUEST); //400
         }
     }
+
+    public function index(Request $request)
+    {
+        try {
+            $user = $request->user();
+
+            $query = Student::where('user_id', $user->id)
+                ->where(function ($search) use ($request) {
+                    $search->
+                    where('name', 'like', '%' . $request->input('search') . '%') // % para pegar em qualquer lugar
+                        ->orWhere('cpf', 'like', '%' . $request->input('search') . '%')
+                        ->orWhere('email', 'like', '%' . $request->input('search') . '%');
+                });
+
+            $students = $query->orderBy('name')->get(); // Ordenação pelo nome
+
+            return response()->json($students, HttpFoundationResponse::HTTP_OK); // 200
+
+        } catch (\Exception $exception) {
+            return response()->json(['message' => $exception->getMessage()],
+            HttpFoundationResponse::HTTP_BAD_REQUEST); // 400
+        }
+    }
 }
