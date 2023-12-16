@@ -59,4 +59,35 @@ class StudentController extends Controller
             HttpFoundationResponse::HTTP_BAD_REQUEST); // 400
         }
     }
+
+    public function destroy(Request $request, $id)
+    {
+        try {
+            $student = Student::find($id); // Busca estudante
+
+            if (!$student) { // Estudante existe?
+                return response()->json(['message' => 'Estudante não encontrado.'],
+                HttpFoundationResponse::HTTP_NOT_FOUND); // 404
+            }
+
+            if ($student->user_id !== $request->user()->id) { // Estudante não pertence ao user
+                return response()->json(['message' => 'Acesso negado.'],
+                HttpFoundationResponse::HTTP_FORBIDDEN); // 403
+            }
+
+            if ($student->trashed()) {
+                return response()->json(['message' => 'Estudante já excluído.'],
+                HttpFoundationResponse::HTTP_BAD_REQUEST); // Estudante ja excluido
+            }
+
+            $student->delete();
+
+            return response()->json(['message' => 'Estudante excluído com sucesso.'],
+            HttpFoundationResponse::HTTP_NO_CONTENT); // 204
+
+        } catch (\Exception $exception) {
+            return response()->json(['message' => $exception->getMessage()],
+            HttpFoundationResponse::HTTP_BAD_REQUEST); // 400
+        }
+    }
 }
