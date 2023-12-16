@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/students', [StudentController::class, 'index']); // Rota 08
 
-
+    Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy'); // Rota09
 });
 
 // rota pública de registro de usuário
