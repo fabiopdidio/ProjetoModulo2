@@ -9,21 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends Controller
 {
-    /*public function dashboard(Request $request)
+    public function dashboard()
     {
         $user = Auth::user();
 
-        // Lógica para obter a quantidade de estudantes cadastrados pelo usuário
-        $registeredStudents = $user->students()->count();
-
-        // Lógica para obter a quantidade de exercícios cadastrados pelo usuário
-        $registeredExercises = ExerciseController-> $user->exercise()->count();
-
-        // Lógica para obter o plano atual do usuário
-        $currentUserPlan = $user->plan_id>description;
-
-        // Lógica para obter a quantidade de cadastros restantes de estudantes
-        $remainingStudents = $user->plan_limit - $registeredStudents;
+        $registeredStudents = $user->students->count();
+        $registeredExercises = Exercise::where('user_id', $user->id)->count();
+        $currentUserPlan = $user->plan ? $user->plan->description : null;
+        $remainingStudents = $user->plan->limit - $registeredStudents;
 
         $data = [
             'registered_students' => $registeredStudents,
@@ -32,9 +25,6 @@ class DashboardController extends Controller
             'remaining_students' => $remainingStudents,
         ];
 
-        return response()->json([
-            'message' => 'Dashboard retornado com sucesso',
-            'data' => $data,
-        ], Response::HTTP_OK);
-    }*/
+        return $data;
+    }
 }
