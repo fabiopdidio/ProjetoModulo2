@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     // rotas privadas
 
-    //Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard'); //Rota S03
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard'); //Rota S03
 
     Route::post('/exercises', [ExerciseController::class, 'store']); //Rota S04
 
