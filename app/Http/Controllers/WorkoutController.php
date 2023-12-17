@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class WorkoutController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request) // Cadastro de treino
     {
         try {
             $request->validate([
@@ -50,6 +50,34 @@ class WorkoutController extends Controller
             $workout->save();
 
             return response()->json($workout, Response::HTTP_CREATED); //201
+
+        } catch (\Exception $exception) {
+            return response()->json(
+                ['message' => $exception->getMessage()],
+                Response::HTTP_BAD_REQUEST //400
+            );
+        }
+    }
+
+    public function index($studentId) // Listagem de treinos
+    {
+        try {
+            $student = Student::find($studentId);
+
+            if (!$student) {
+                return response()->json(
+                    ['message' => 'Estudante não encontrado'],
+                    Response::HTTP_NOT_FOUND //404
+                );
+            }
+
+            $workouts = Workout::where('student_id', $studentId)
+                ->orderBy('day')
+                ->get();
+
+            $allWorkouts = $workouts->groupBy('day');
+
+            return response()->json($allWorkouts, Response::HTTP_OK); //200
 
         } catch (\Exception $exception) {
             return response()->json(
