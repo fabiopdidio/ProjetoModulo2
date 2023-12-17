@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/workouts', [WorkoutController::class, 'store']); //Rota S11
 
+    Route::get('/students/{id}/workouts', [WorkoutController::class, 'index']); // Rota 12
+
 
 });
 
