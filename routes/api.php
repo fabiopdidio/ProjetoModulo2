@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/students/{id}/workouts', [WorkoutController::class, 'index']); // Rota 12
 
+    Route::get('/students/{id}', [StudentController::class, 'index']); // Rota 13
 
 });
 

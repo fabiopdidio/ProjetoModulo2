@@ -26,5 +26,6 @@ class Student extends Model
         'cep',
     ];
 
+
     protected $dates = ['deleted_at']; //soft delete
 }
