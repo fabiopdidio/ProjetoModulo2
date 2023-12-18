@@ -18,7 +18,7 @@ class StudentController extends Controller
                 'name' => 'required|max:255',
                 'email' => 'required|email|unique:students|max:255',
                 'date_birth' => 'required|date',
-                'cpf' => 'required|unique:students|max:255',
+                'cpf' => 'required|unique:students|max:14',
                 'cep' => 'nullable|string',
                 'street' => 'nullable|string',
                 'state' => 'nullable|string',
