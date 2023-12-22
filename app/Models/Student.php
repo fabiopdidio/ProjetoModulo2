@@ -28,4 +28,9 @@ class Student extends Model
 
 
     protected $dates = ['deleted_at']; //soft delete
+
+    public function workouts()
+{
+    return $this->hasMany(Workout::class, 'student_id');
+}
 }
