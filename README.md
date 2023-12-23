@@ -1,13 +1,9 @@
 # Trainsys API
 
-## Descrição do Projeto
+## ✍️ Descrição do Projeto
 
 O projeto Trainsys API consiste em uma API REST desenvolvida em Laravel 10, criada para complementar o frontend do Trainsys, uma solução para profissionais de educação física e para academias.
-A API gerencia usuários, estudantes, exercícios e treinos, proporcionando uma integração eficiente entre o frontend e o backend.
-
-## Problema Resolvido
-
-O projeto resolve a necessidade do Trainsys Tech de ter uma API completa para suportar todas as funcionalidades do sistema, permitindo o a criação e gerenciamento de usuários, exercícios, estudantes e treinos de forma eficaz.
+A API gerencia usuários, estudantes, exercícios e treinos, proporcionando uma integração eficiente entre o frontend e o backend, completa para suportar todas as funcionalidades do sistema.
 
 ## 🔧 Tecnologias Utilizadas
 
@@ -15,7 +11,7 @@ O projeto resolve a necessidade do Trainsys Tech de ter uma API completa para su
 -   PostgreSQL
 -   DOMPDF (para a geração de PDF)
 
-## Requisitos do Sistema
+## 💼 Requisitos do Sistema
 
 Certifique-se de ter as seguintes ferramentas instaladas antes de executar o projeto:
 
@@ -25,7 +21,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 
 -   **[DBeaver](https://dbeaver.io/)**: Ferramenta de gerenciamento de banco de dados para visualizar e interagir com o PostgreSQL.
 
-## Executando o Projeto
+## ⏸️ Executando o Projeto
 
 1. Clone o repositório.
 - `git clone https://github.com/fabiopdidio/ProjetoModulo2`
@@ -42,8 +38,34 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ### 🚥 Endpoints - Rotas Usuários
 
 -  ```POST /api/users```: Cadastra um novo usuário.
+```http
+{
+  "name": "Neymar Jr",
+  "email": "ney@gmail.com",
+  "date_birth": "1990-12-08",
+  "cpf": "111.141.190.44",
+  "password": "senha1234",
+  "plan_id": 2
+}
+```
+
 -   ```POST /api/login```: Realiza o login de um usuário.
+```http
+{
+  "email": "ney@gmail.com",
+  "password": "senha1234"
+}
+```
+
 -   ```GET /api/dashboard```: Retorna os dados cadastrados para o dashboard.
+```http
+{
+  "registered_students": 10,
+  "registered_exercises": 30,
+  "current_user_plan": "Plano prata",
+  "remaining_students": 10
+}
+```
 
 ### 🚥 Endpoints - Rotas Exercícios
 
@@ -65,7 +87,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 -   ```GET /api/students/{id}```: Lista todos dados de um estudante por ID.
 -   ```GET /api/students/export?id_do_estudante={id}```: Exporta o treino do estudante em formato PDF.
 
-## Melhorias Futuras
+## 🔜 Melhorias Futuras
 
 -   Adicionar mais campos para especificação de exercícios.
 -   Fazer a integração com uma API externa como o ViaCEP para apenas com o CEP retornar todos dados.
