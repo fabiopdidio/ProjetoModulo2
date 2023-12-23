@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Exercise;
 use App\Models\Student;
 use App\Models\Workout;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View as FacadesView;
 use Symfony\Component\HttpFoundation\Response;
+use Barryvdh\DomPDF\Facade\PDF as PDF;
 
 class WorkoutController extends Controller
 {
@@ -79,6 +82,30 @@ class WorkoutController extends Controller
 
             return response()->json($allWorkouts, Response::HTTP_OK); //200
 
+        } catch (\Exception $exception) {
+            return response()->json(
+                ['message' => $exception->getMessage()],
+                Response::HTTP_BAD_REQUEST //400
+            );
+        }
+    }
+
+    public function exportPdf(Request $request)
+    {
+        try {
+            $studentId = $request->query('id_do_estudante');
+            $student = Student::find($studentId);
+
+            $workouts = Workout::with('exercise')
+                ->where('student_id', $studentId)
+                ->get();
+
+            $pdf = PDF::loadView(
+                'pdf.workout',
+                ['student' => $student, 'workouts' => $workouts]
+            );
+
+            return $pdf->stream();
         } catch (\Exception $exception) {
             return response()->json(
                 ['message' => $exception->getMessage()],

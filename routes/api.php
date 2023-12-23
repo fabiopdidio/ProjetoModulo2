@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::delete('/exercises/{id}', [ExerciseController::class, 'destroy'])->name('exercises.destroy'); // Rota S06
 
+    Route::get('/student/export/{id}', [WorkoutController::class, 'exportPdf']); // Rota 14
+
     Route::post('/students', [StudentController::class, 'store'])->middleware('validate.students.limit'); // Rota 07
 
     Route::get('/students', [StudentController::class, 'index']); // Rota 08
@@ -34,11 +36,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/students/{id}', [StudentController::class, 'index']); // Rota 13
 
+    Route::get('/student/export', [WorkoutController::class, 'exportPdf']); // Rota 14
 });
 
-// rota pública de registro de usuário
 Route::post('/users', [UserController::class, 'store']); //Rota S01
 
-// rota pública de login
 Route::post('/login', [AuthController::class, 'store'])->name('login'); // Rota S02
-
