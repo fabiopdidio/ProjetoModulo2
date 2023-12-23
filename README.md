@@ -70,7 +70,20 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ### 🚥 Endpoints - Rotas Exercícios
 
 -   ```POST /api/exercises```: Cria e cadastra um novo exercício.
+```http
+{
+  "description": "Rosca direta"
+}
+```
+
 -   ```GET /api/exercises```: Lista os exercícios do usuário logado.
+```http
+{
+  "id": 1,
+  "description": "Rosca direta"
+}
+```
+
 -   ```DELETE /api/exercises/{id}```: Deleta um exercício através do seu ID.
 
 ### 🚥 Endpoints - Rotas Estudantes
