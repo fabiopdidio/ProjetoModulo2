@@ -28,9 +28,16 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ## Executando o Projeto
 
 1. Clone o repositório.
+- `git clone https://github.com/fabiopdidio/ProjetoModulo2`
+
 2. Configure o ambiente Laravel.
-3. Execute as migrations e seed para configurar o banco de dados.
-4. Instale as dependências do projeto.
+- Crie um arquivo .env na raiz do projeto, copie o conteúdo de .env.example e cole no arquivo.
+
+3. Execute as migrations e seed para configurar o banco de dados: 
+- `php artisan migrate --seed`
+
+4. Instale as dependências do projeto: 
+- `composer install`
 
 ### Usuários
 
