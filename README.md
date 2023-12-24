@@ -195,15 +195,14 @@ Exemplo de requisição:
   "number": "456"
 }
 ```
-
 -   `GET /api/students/export?id_do_estudante={id}`: Exporta o treino do estudante em formato PDF.
 
 ## 🔜 Melhorias Futuras
 
--   Adicionar mais campos para especificação de exercícios.
+-   Adicionar mais campos para especificação de exercícios (número de séries, tipo de treino e etc.).
 -   Fazer a integração com uma API externa como o ViaCEP para apenas com o CEP retornar todos dados.
 -   Adicionar autenticação com JSON Web Tokens (JWT) em outras rotas.
--   Aumenta os limites de cadastro de estudantes, permitindo maior número de estudantes por professor.
+-   Aumentar os limites de cadastro de estudantes por plano, permitindo maior número de estudantes por professor.
 
 ---
 
