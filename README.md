@@ -21,6 +21,8 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 
 -   **[DBeaver](https://dbeaver.io/)**: Ferramenta de gerenciamento de banco de dados para visualizar e interagir com o PostgreSQL.
 
+-   **[Mailtrap](https://mailtrap.io/)**: Caixa de entrada de e-mail simulada para testar envios de e-mail em ambientes de desenvolvimento.
+
 ## ⏸️ Executando o Projeto
 
 1. Clone o repositório.
@@ -43,6 +45,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 
 -   `POST /api/users`: Cadastra um novo usuário.
 
+Exemplo de requisição:
 ```http
 {
   "name": "Neymar Jr",
@@ -55,7 +58,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ```
 
 -   `POST /api/login`: Realiza o login de um usuário.
-
+Exemplo de requisição:
 ```http
 {
   "email": "ney@gmail.com",
@@ -64,7 +67,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ```
 
 -   `GET /api/dashboard`: Retorna os dados cadastrados para o dashboard.
-
+Exemplo de requisição:
 ```http
 {
   "registered_students": 10,
@@ -77,7 +80,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ### 🚥 Endpoints - Rotas Exercícios
 
 -   `POST /api/exercises`: Cria e cadastra um novo exercício.
-
+Exemplo de requisição:
 ```http
 {
   "description": "Rosca direta"
@@ -85,7 +88,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ```
 
 -   `GET /api/exercises`: Lista os exercícios do usuário logado.
-
+Exemplo de requisição:
 ```http
 {
   "id": 1,
@@ -98,7 +101,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ### 🚥 Endpoints - Rotas Estudantes
 
 -   `POST /api/students`: Cadastra um novo estudante.
-
+Exemplo de requisição:
 ```http
 {
   "user_id": 3,
@@ -117,7 +120,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ```
 
 -   `GET /api/students`: Lista estudantes do usuário logado.
-
+Exemplo de requisição:
 ```http
 {
   "user_id": 3,
@@ -142,7 +145,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ### 🚥 Endpoints - Rotas Treinos
 
 -   `POST /api/workouts`: Cadastra um novo treino.
-
+Exemplo de requisição:
 ```http
 {
     "student_id": 24,
@@ -157,7 +160,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
 ```
 
 -   `GET /api/students/{id}/workouts`: Lista os treinos do estudante por ID.
-
+Exemplo de requisição:
 ```http
   {
     "student_id": 24,
@@ -175,7 +178,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
   ```
 
 -   `GET /api/students/{id}`: Lista todos dados de um estudante por ID.
-
+Exemplo de requisição:
 ```http
 {
   "user_id": 3,
@@ -192,17 +195,16 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de executar o pro
   "number": "456"
 }
 ```
-
 -   `GET /api/students/export?id_do_estudante={id}`: Exporta o treino do estudante em formato PDF.
 
 ## 🔜 Melhorias Futuras
 
--   Adicionar mais campos para especificação de exercícios.
+-   Adicionar mais campos para especificação de exercícios (número de séries, tipo de treino e etc.).
 -   Fazer a integração com uma API externa como o ViaCEP para apenas com o CEP retornar todos dados.
 -   Adicionar autenticação com JSON Web Tokens (JWT) em outras rotas.
--   Aumenta os limites de cadastro de estudantes, permitindo maior número de estudantes por professor.
+-   Aumentar os limites de cadastro de estudantes por plano, permitindo maior número de estudantes por professor.
 
 ---
 
-**Desenvolvido por Fábio Didio**
+**Desenvolvido por Fábio Didio para o Segundo Móulo do DEVinHouse - Zucchetti**
 ```
