@@ -16,8 +16,7 @@ class ExerciseController extends Controller
                 'description' => 'string|required|max:255',
             ]);
 
-            // Verifica se o exercício já existe para o usuário
-            $existingExercise = Exercise::where('user_id', auth()->id())
+            $existingExercise = Exercise::where('user_id', auth()->id())   // Verifica se o exercício já existe para o usuário
                 ->where('description', $request->input('description'))->first();
 
             if ($existingExercise) {
@@ -61,33 +60,38 @@ class ExerciseController extends Controller
         try {
             $user = Auth::user();
 
-            // Verificar se o exercício existe
-            $exercise = Exercise::find($id);
+            $exercise = Exercise::find($id); // Verificar se o exercício existe
 
             if (!$exercise) {
-                return response()->json(['message' => 'Exercício não encontrado', 'status' => 404],
-                Response::HTTP_NOT_FOUND); //404 Não existe
+                return response()->json(
+                    ['message' => 'Exercício não encontrado', 'status' => 404],
+                    Response::HTTP_NOT_FOUND
+                ); //404
             }
 
-            // Verificar se o exercício pertence ao usuário autenticado
-            if ($exercise->user_id !== $user->id) {
-                return response()->json(['message' => 'Permissão negada', 'status' => 403],
-                Response::HTTP_FORBIDDEN); //403 Criado por outro usuario
+            if ($exercise->user_id !== $user->id) {   // Verifica se o exercício pertence ao usuário autenticado
+                return response()->json(
+                    ['message' => 'Permissão negada', 'status' => 403],
+                    Response::HTTP_FORBIDDEN
+                ); //403 Criado por outro usuario
             }
 
-            // Verificar se há treinos vinculados ao exercício
-            if ($exercise->wourkouts()->exists()) {
-                return response()->json(['message' => 'Não permitido deletar, há treinos vinculados ao exercício', 'status' => 409],
-                Response::HTTP_CONFLICT); //409 conflito
+            if ($exercise->wourkouts()->exists()) {  // Verificar se há treinos vinculados ao exercício
+                return response()->json(
+                    ['message' => 'Não permitido deletar, há treinos vinculados ao exercício', 'status' => 409],
+                    Response::HTTP_CONFLICT
+                ); //409 conflito
             }
 
-            // Deletar o exercício
-            $exercise->delete();
+            $exercise->delete(); // Deletar o exercício
 
             return response()->json([], Response::HTTP_NO_CONTENT);
+
         } catch (\Exception $exception) {
-            return response()->json(['message' => $exception->getMessage(), 'status' => 400],
-            Response::HTTP_BAD_REQUEST);
+            return response()->json(
+                ['message' => $exception->getMessage(), 'status' => 400],
+                Response::HTTP_BAD_REQUEST
+            );
         }
     }
 }

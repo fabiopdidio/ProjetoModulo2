@@ -44,8 +44,7 @@ class StudentController extends Controller
 
             $query = Student::where('user_id', $user->id)
                 ->where(function ($search) use ($request) {
-                    $search->
-                    where('name', 'like', '%' . $request->input('search') . '%') // % para pegar em qualquer lugar
+                    $search->where('name', 'like', '%' . $request->input('search') . '%') // % para pegar em qualquer lugar
                         ->orWhere('cpf', 'like', '%' . $request->input('search') . '%')
                         ->orWhere('email', 'like', '%' . $request->input('search') . '%');
                 });
@@ -55,8 +54,10 @@ class StudentController extends Controller
             return response()->json($students, HttpFoundationResponse::HTTP_OK); // 200
 
         } catch (\Exception $exception) {
-            return response()->json(['message' => $exception->getMessage()],
-            HttpFoundationResponse::HTTP_BAD_REQUEST); // 400
+            return response()->json(
+                ['message' => $exception->getMessage()],
+                HttpFoundationResponse::HTTP_BAD_REQUEST
+            ); // 400
         }
     }
 
@@ -66,28 +67,38 @@ class StudentController extends Controller
             $student = Student::find($id); // Busca estudante
 
             if (!$student) { // Estudante existe?
-                return response()->json(['message' => 'Estudante não encontrado.'],
-                HttpFoundationResponse::HTTP_NOT_FOUND); // 404
+                return response()->json(
+                    ['message' => 'Estudante não encontrado.'],
+                    HttpFoundationResponse::HTTP_NOT_FOUND
+                ); // 404
             }
 
             if ($student->user_id !== $request->user()->id) { // Estudante não pertence ao user
-                return response()->json(['message' => 'Acesso negado.'],
-                HttpFoundationResponse::HTTP_FORBIDDEN); // 403
+                return response()->json(
+                    ['message' => 'Acesso negado.'],
+                    HttpFoundationResponse::HTTP_FORBIDDEN
+                ); // 403
             }
 
             if ($student->trashed()) {
-                return response()->json(['message' => 'Estudante já excluído.'],
-                HttpFoundationResponse::HTTP_BAD_REQUEST); // Estudante ja excluido
+                return response()->json(
+                    ['message' => 'Estudante já excluído.'],
+                    HttpFoundationResponse::HTTP_BAD_REQUEST
+                ); // Estudante ja excluido
             }
 
             $student->delete();
 
-            return response()->json(['message' => 'Estudante excluído com sucesso.'],
-            HttpFoundationResponse::HTTP_NO_CONTENT); // 204
+            return response()->json(
+                ['message' => 'Estudante excluído com sucesso.'],
+                HttpFoundationResponse::HTTP_NO_CONTENT
+            ); // 204
 
         } catch (\Exception $exception) {
-            return response()->json(['message' => $exception->getMessage()],
-            HttpFoundationResponse::HTTP_BAD_REQUEST); // 400
+            return response()->json(
+                ['message' => $exception->getMessage()],
+                HttpFoundationResponse::HTTP_BAD_REQUEST
+            ); // 400
         }
     }
 
@@ -109,22 +120,27 @@ class StudentController extends Controller
                 'contact' => 'required|string|max:20|unique:students,contact,' . $id,
             ]);
 
-            // Busca e atualiza o estudante
-            $student = Student::find($id);
+            $student = Student::find($id);  // Busca e atualiza o estudante
 
             if (!$student) {
-                return response()->json(['message' => 'Estudante não encontrado'],
-                HttpFoundationResponse::HTTP_NOT_FOUND);
+                return response()->json(
+                    ['message' => 'Estudante não encontrado'],
+                    HttpFoundationResponse::HTTP_NOT_FOUND
+                );
             }
 
             $student->update($request->all());
 
-            return response()->json(['message' => 'Estudante atualizado com sucesso'],
-            HttpFoundationResponse::HTTP_OK); // 200
+            return response()->json(
+                ['message' => 'Estudante atualizado com sucesso'],
+                HttpFoundationResponse::HTTP_OK
+            ); // 200
 
         } catch (\Exception $exception) {
-            return response()->json(['message' => $exception->getMessage()],
-            HttpFoundationResponse::HTTP_BAD_REQUEST); // 400
+            return response()->json(
+                ['message' => $exception->getMessage()],
+                HttpFoundationResponse::HTTP_BAD_REQUEST
+            ); // 400
         }
     }
 }

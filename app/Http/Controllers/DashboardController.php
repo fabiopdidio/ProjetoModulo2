@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        $user = Auth::user();
+        $user = Auth::user(); //Rota privada, exige autenticação
 
         $registeredStudents = $user->students->count();
         $registeredExercises = Exercise::where('user_id', $user->id)->count();
